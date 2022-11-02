@@ -34,21 +34,19 @@ void Snakey::MoveSnake(Vector2 nextPosition, Vector2Int gridPos)
     grid->gridArray[tail->gridPosition.x][tail->gridPosition.y].currentState = WALKABLE;
 
     Node* currentNode = tail;
-    
     while (currentNode != nullptr)
     {
         if (currentNode == head)
         {
             currentNode->worldPosition = nextPosition;
-            currentNode->gridPosition = gridPos;
-            grid->gridArray[currentNode->gridPosition.x][currentNode->gridPosition.y].currentState = OBSTACLE;
+            currentNode->gridPosition = gridPos;            
         }
         else
         {
             currentNode->worldPosition = currentNode->previousNode->worldPosition;
             currentNode->gridPosition = currentNode->previousNode->gridPosition;
-            grid->gridArray[currentNode->gridPosition.x][currentNode->gridPosition.y].currentState = OBSTACLE;
         }
+        grid->gridArray[currentNode->gridPosition.x][currentNode->gridPosition.y].currentState = OBSTACLE;
         currentNode = currentNode->previousNode;
     }
     DrawSnake();
@@ -59,29 +57,5 @@ void Snakey::DrawSnake()
     for (Node* item : body)
     {
         item->DrawBody();
-    }
-}
-
-void Snakey::UpdateSnakePos()
-{
-    if (count <= 0)
-    {
-        return;
-    }
-
-    Node* currentNode = tail;
-    
-    while (currentNode != nullptr)
-    {
-        if (currentNode == head)
-        {
-            currentNode = currentNode->previousNode;
-            continue;
-        }
-        grid->gridArray[currentNode->gridPosition.x][currentNode->gridPosition.y].currentState = WALKABLE;
-        currentNode->worldPosition = currentNode->previousNode->worldPosition;
-        currentNode->gridPosition = currentNode->previousNode->gridPosition;
-        grid->gridArray[currentNode->gridPosition.x][currentNode->gridPosition.y].currentState = OBSTACLE;
-        currentNode = currentNode->previousNode;
     }
 }

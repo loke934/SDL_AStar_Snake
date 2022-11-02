@@ -44,37 +44,16 @@ void Grid::FindPath(GridCell* startCell, GridCell* targetCell, std::vector<Vecto
             return;
         }
 
-        std::vector<GridCell*> neighbours;
-        for (int x = -1; x <= 1; x++)
-        {
-            for (int y = -1; y <= 1; y++)
-            {
-                //excluding diagonal
-                if (x == -1 && y ==-1 || x == -1 && y == 1 || x == 1 && y == -1 || x == 1 && y == 1 || x == 0 && y == 0)
-                {
-                    continue;
-                }
-        
-                int checkX = currentCell->gridPosition.x + x;
-                int checkY = currentCell->gridPosition.y + y;
-        
-                if (checkX >= 0 && checkX < GRID_SIZE_X && checkY >= 0 && checkY < GRID_SIZE_Y)
-                {
-                    if (gridArray[checkX][checkY].currentState != OBSTACLE)
-                    {
-                        neighbours.push_back(&gridArray[checkX][checkY]);
-                    }
-                }
-            }
-        }
+        std::vector<GridCell*> neighbors;
+        SetNeighbors(currentCell, neighbors);
        
-        for (auto& neighbour : neighbours)
+        for (GridCell*& neighbour : neighbors)
         {
             if ( closedSet.find(neighbour) != closedSet.end())
             {
                 continue;
             }
-            int newMovementCostToNeighbor = currentCell->gCost + GetDistance(currentCell, neighbour);
+            const int newMovementCostToNeighbor = currentCell->gCost + GetDistance(currentCell, neighbour);
             if (newMovementCostToNeighbor < neighbour->gCost || !openSet.Contains(neighbour))
             {
                 neighbour->gCost = newMovementCostToNeighbor;
@@ -90,30 +69,30 @@ void Grid::FindPath(GridCell* startCell, GridCell* targetCell, std::vector<Vecto
 }
 
 
-std::vector<GridCell*> Grid::GetNeighbors(const GridCell* cell, std::vector<GridCell*> &neighbors)
+void Grid::SetNeighbors(const GridCell* currentCell, std::vector<GridCell*> &neighbors)
 {
     for (int x = -1; x <= 1; x++)
     {
         for (int y = -1; y <= 1; y++)
         {
-           //excluding diagonal
-             if (x == -1 && y ==-1 || x == -1 && y == 1 || x == 1 && y == -1 || x == 1 && y == 1 || x == 0 && y == 0)
-             {
-                 
-                 continue;
-             }
-            
-            int checkX = cell->gridPosition.x + x;
-            int checkY = cell->gridPosition.y + y;
-            
+            //excluding diagonal
+            if (x == -1 && y ==-1 || x == -1 && y == 1 || x == 1 && y == -1 || x == 1 && y == 1 || x == 0 && y == 0)
+            {
+                continue;
+            }
+        
+            int checkX = currentCell->gridPosition.x + x;
+            int checkY = currentCell->gridPosition.y + y;
+        
             if (checkX >= 0 && checkX < GRID_SIZE_X && checkY >= 0 && checkY < GRID_SIZE_Y)
             {
-                neighbors.push_back(&gridArray[x][y]);
+                if (gridArray[checkX][checkY].currentState != OBSTACLE)
+                {
+                    neighbors.push_back(&gridArray[checkX][checkY]);
+                }
             }
         }
     }
-    
-    return neighbors;
 }
 
 int Grid::GetDistance(GridCell* cellA, GridCell* cellB)

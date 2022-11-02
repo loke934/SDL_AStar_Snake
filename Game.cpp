@@ -17,6 +17,13 @@ void Game::SetupGame()
         std::cout << "No path was found!"  << std::endl;
         return;
     }
+    //Debug: draw the found path
+    // for (size_t i = 0; i < path.size()-1; i++)
+    // {
+    //     grid->gridArray[path[i].x][path[i].y].currentState = OBSTACLE;
+    //     grid->gridArray[path[i].x][path[i].y].Draw();
+    // }
+  
     length = (int)path.size();
     currentState = MOVE;
 }

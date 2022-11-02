@@ -18,7 +18,7 @@ public:
     void SetupGrid();
     void DrawGrid();
     void FindPath(GridCell* startCell, GridCell* targetCell, std::vector<Vector2Int> &path);
-    std::vector<GridCell*> GetNeighbors(const GridCell* cell, std::vector<GridCell*> &neighbors);
+    void SetNeighbors(const GridCell* currentCell, std::vector<GridCell*> &neighbors);
     int GetDistance(GridCell* cellA, GridCell* cellB);
     void RetracePath(GridCell* startCell, GridCell* targetCell, std::vector<Vector2Int> &path);
 

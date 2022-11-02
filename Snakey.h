@@ -13,7 +13,6 @@ public:
     void GrowSnake(Node* node, Vector2 worldPos, Vector2Int gridPos);
     void MoveSnake(Vector2 nextPosition, Vector2Int gridPos);
     void DrawSnake();
-    void UpdateSnakePos();
 };
 
 
