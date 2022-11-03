@@ -3,23 +3,22 @@
 
 void Snakey::GrowSnake(Vector2 worldPos, Vector2Int gridPos)
 {
-    Node* node = new Node;
-    node->worldPosition = worldPos;
-    node->gridPosition = gridPos;
     grid->gridArray[gridPos.x][gridPos.y].currentState = OBSTACLE;
+    body.push_back({});
+    Node& last = body.back();
+    last.worldPosition = worldPos;
+    last.gridPosition = gridPos;
     
     if (count <= 0) 
     {
-        head = node;
-        tail = node;
+        head = &last;
     }
     else
     {
-        node->previousNode = tail;
-        tail->nextNode = node;
-        tail = node;
+        last.previousNode = tail;
+        tail->nextNode = &last;
     }
-    body.push_back(node);
+    tail = &last;
     count++;
 }
 
@@ -54,8 +53,8 @@ void Snakey::MoveSnake(Vector2 nextPosition, Vector2Int gridPos)
 
 void Snakey::DrawSnake()
 {
-    for (Node* item : body)
+    for (Node item : body)
     {
-        item->DrawBody();
+        item.DrawBody();
     }
 }

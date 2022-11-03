@@ -1,10 +1,9 @@
 ﻿#pragma once
 #include <memory>
-
 #include "Grid.h"
 #include "Snakey.h"
 
-extern Grid* grid;
+extern std::unique_ptr<Grid> grid;
 
 enum GAME_STATE
 {
@@ -19,13 +18,8 @@ class Game
 public:
     Game()
     {
-        grid = new Grid();
-        snake = new Snakey();
-    }
-    ~Game()
-    {
-        delete snake;
-        delete grid;
+        grid = std::make_unique<Grid>();
+        snake = std::make_unique<Snakey>();
     }
 
     GAME_STATE currentState = DEFAULT_STATE;
@@ -37,7 +31,7 @@ public:
     int length = 0;
     int index = 0;
 
-    Snakey* snake;
+    std::unique_ptr<Snakey> snake;
     float time = 1.f;
     float timer = 0.3f;
     
@@ -48,7 +42,4 @@ public:
     void DoMovement();
     void SetMovementPath();
     Vector2Int GetRandomGridPosition();
-
 };
-
-

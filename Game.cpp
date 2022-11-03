@@ -2,7 +2,7 @@
 #include "Engine.h"
 #include <iostream>
 
-Grid* grid;
+std::unique_ptr<Grid> grid;
 
 void Game::SetupGame()
 {

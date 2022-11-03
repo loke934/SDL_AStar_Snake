@@ -9,17 +9,9 @@ public:
         head = nullptr;
         tail = nullptr;
         count = 0;
+        body.reserve(GRID_SIZE);
     }
-    ~Snakey()
-    {
-        for (Node* node : body)
-        {
-            delete node;
-        }
-        body.clear();
-    }
-    std::vector<Node*> body;
-    
+    std::vector<Node> body;
     Node* head;
     Node* tail;
     int count;
