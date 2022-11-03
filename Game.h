@@ -10,17 +10,23 @@ enum GAME_STATE
 {
     MOVE,
     FIND_PATH,
+    GAME_OVER,
     DEFAULT_STATE
 };
 
 class Game
 {
 public:
-
+    
     Game()
     {
         grid = new Grid();
         snake = new Snakey();
+    }
+    ~Game()
+    {
+        delete snake;
+        delete grid;
     }
 
     GAME_STATE currentState = DEFAULT_STATE;
@@ -34,21 +40,16 @@ public:
 
     Snakey* snake;
     float time = 1.f;
+    float timer = 0.3f;
     
     void SetupGame();
     void SpawnSnake();
     void SpawnFruit();
-    void UpdateGame();
+    bool UpdateGame();
     void DoMovement();
     void SetMovementPath();
     Vector2Int GetRandomGridPosition();
 
-    void EndGame();
-
-    //Clean up func when I close the application delete the nodes
-    //return, move and copy keep it stack allocated more optimized
-    // std::vector<Node> nodeBuffer;
-    // std::vector<Node*> unusedNodes;
 };
 
 

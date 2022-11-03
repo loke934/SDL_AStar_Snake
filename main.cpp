@@ -4,7 +4,7 @@
 #include "Engine.h"
 #include "Game.h"
 #include <ctime>
-
+#include <SDL/SDL_ttf.h>
 
 int main(int argc, char** argv)
 {
@@ -15,8 +15,14 @@ int main(int argc, char** argv)
 
 	SDL_SetRenderDrawColor(render, 20, 0, 0, 255);
 	SDL_RenderClear(render);
+
+	TTF_Init();
+	TTF_Font* font = TTF_OpenFont("res/roboto.ttf", 50);
+	SDL_Surface* text_surf = TTF_RenderText_Solid(font, "Game Over!", {255, 0, 0, 255} );
+	SDL_Texture* text_texture =SDL_CreateTextureFromSurface(render, text_surf);
 	
 	bool isRunning = true;
+	bool isGameOver = false;
 	Game game;
 	Engine engine;
 	game.SetupGame();
@@ -32,7 +38,6 @@ int main(int argc, char** argv)
 			{
 			case SDL_QUIT:
 				isRunning = false;
-				game.EndGame();
 				break;
 				
 			case SDL_KEYDOWN:
@@ -40,12 +45,18 @@ int main(int argc, char** argv)
 				if (scancode == SDL_SCANCODE_ESCAPE)
 				{
 					isRunning = false;
-					game.EndGame();
 					break;
 				}
 			}
 		}
-		game.UpdateGame();
+		isGameOver =  game.UpdateGame();
+		if (isGameOver)
+		{
+			SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
+			SDL_RenderClear(render);
+			SDL_Rect text_dst = { (WINDOW_WIDTH /2) - (text_surf->w /2), (WINDOW_HEIGHT/2) -text_surf->h , text_surf->w, text_surf->h };
+			SDL_RenderCopy(render, text_texture, NULL, &text_dst);
+		}
 		SDL_RenderPresent(render);
 	}
 	return 0;

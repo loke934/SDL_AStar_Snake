@@ -23,7 +23,7 @@ void Game::SetupGame()
     //     grid->gridArray[path[i].x][path[i].y].currentState = OBSTACLE;
     //     grid->gridArray[path[i].x][path[i].y].Draw();
     // }
-  
+    grid->gridArray[fruitPos.x][fruitPos.y].Draw();
     length = (int)path.size();
     currentState = MOVE;
 }
@@ -43,10 +43,9 @@ void Game::SpawnFruit()
     Vector2Int random = GetRandomGridPosition();
     fruitPos = random;
     grid->gridArray[random.x][random.y].currentState = FRUIT;
-    grid->gridArray[random.x][random.y].Draw();
 }
 
-void Game::UpdateGame()
+bool Game::UpdateGame()
 {
     switch (currentState)
     {
@@ -58,9 +57,14 @@ void Game::UpdateGame()
         SetMovementPath();       
         break;
         
+    case GAME_OVER:
+        return true;
+        
     case DEFAULT_STATE:
         break;
     }
+
+    return false;
 }
 
 void Game::DoMovement()
@@ -73,7 +77,7 @@ void Game::DoMovement()
             Vector2  nextPosition = grid->gridArray[nextGridCell.x][nextGridCell.y].worldPosition;
             snake->MoveSnake(nextPosition, nextGridCell);
             index++;
-            time = 0.5f;
+            time = timer;
         }
         else
         {
@@ -88,21 +92,29 @@ void Game::SetMovementPath()
     if (index >= length)
     {
         snakePos = fruitPos;
-        SpawnFruit();
         path.clear();
             
-        grid->FindPath(&grid->gridArray[snakePos.x][snakePos.y], &grid->gridArray[fruitPos.x][fruitPos.y], path);
-        if (path.empty())
+        for (size_t i = 0; i < 999; i++)
         {
-            std::cout << "Error: Path empty!" << std::endl;
-            return;
+            SpawnFruit();
+            grid->FindPath(&grid->gridArray[snakePos.x][snakePos.y], &grid->gridArray[fruitPos.x][fruitPos.y], path);
+            if (!path.empty())
+            {
+                grid->gridArray[fruitPos.x][fruitPos.y].Draw();
+                break;
+            }
+            if (i == 998 && path.empty())
+            {
+                currentState = GAME_OVER;
+                return;
+            }
         }
-            
+        
         Node* node = new Node();
         snake->GrowSnake(node, snake->tail->worldPosition,snake->tail->gridPosition);
         snake->DrawSnake();
             
-        length = path.size();
+        length = (int)path.size();
         index = 0;
         currentState = MOVE;
     }
@@ -120,8 +132,3 @@ Vector2Int Game::GetRandomGridPosition()
     return randomVector;
 }
 
-void Game::EndGame()
-{
-    delete snake;
-    delete grid;
-}
