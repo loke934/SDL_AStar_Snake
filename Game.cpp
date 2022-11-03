@@ -17,24 +17,24 @@ void Game::SetupGame()
         std::cout << "No path was found!"  << std::endl;
         return;
     }
+    grid->gridArray[fruitPos.x][fruitPos.y].Draw();
+    length = (int)path.size();
+    currentState = MOVE;
+
     //Debug: draw the found path
     // for (size_t i = 0; i < path.size()-1; i++)
     // {
     //     grid->gridArray[path[i].x][path[i].y].currentState = OBSTACLE;
     //     grid->gridArray[path[i].x][path[i].y].Draw();
     // }
-    grid->gridArray[fruitPos.x][fruitPos.y].Draw();
-    length = (int)path.size();
-    currentState = MOVE;
 }
 
 void Game::SpawnSnake()
 {
-    Node* node = new Node();
     Vector2Int random = GetRandomGridPosition();
     snakePos = random;
     Vector2 worldPosition = grid->gridArray[random.x][random.y].worldPosition;
-    snake->GrowSnake(node,worldPosition, random);
+    snake->GrowSnake(worldPosition, random);
     snake->DrawSnake();
 }
 
@@ -110,8 +110,7 @@ void Game::SetMovementPath()
             }
         }
         
-        Node* node = new Node();
-        snake->GrowSnake(node, snake->tail->worldPosition,snake->tail->gridPosition);
+        snake->GrowSnake(snake->tail->worldPosition,snake->tail->gridPosition);
         snake->DrawSnake();
             
         length = (int)path.size();

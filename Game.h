@@ -17,7 +17,6 @@ enum GAME_STATE
 class Game
 {
 public:
-    
     Game()
     {
         grid = new Grid();
@@ -35,7 +34,7 @@ public:
     std::vector<Vector2Int> path;
     Vector2Int fruitPos;
     Vector2Int snakePos;
-    int length;
+    int length = 0;
     int index = 0;
 
     Snakey* snake;

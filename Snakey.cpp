@@ -1,8 +1,9 @@
 ﻿#include "Snakey.h"
 #include "Game.h"
 
-void Snakey::GrowSnake(Node* node, Vector2 worldPos, Vector2Int gridPos)
+void Snakey::GrowSnake(Vector2 worldPos, Vector2Int gridPos)
 {
+    Node* node = new Node;
     node->worldPosition = worldPos;
     node->gridPosition = gridPos;
     grid->gridArray[gridPos.x][gridPos.y].currentState = OBSTACLE;
@@ -20,7 +21,6 @@ void Snakey::GrowSnake(Node* node, Vector2 worldPos, Vector2Int gridPos)
     }
     body.push_back(node);
     count++;
-   
 }
 
 void Snakey::MoveSnake(Vector2 nextPosition, Vector2Int gridPos)
