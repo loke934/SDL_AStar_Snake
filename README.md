@@ -11,6 +11,7 @@ The code is divided and structured after some primary features. Game class that 
 - Growing snake with a linked-list approach.  
 
 ![DrawPath](https://user-images.githubusercontent.com/76095991/204778272-fbc30ddc-b492-4666-a582-5e3459d3711b.png)
+
 Found path to target, outlined in light-purple.
 
-![Moving](https://user-images.githubusercontent.com/76095991/204778439-b1cf592f-602c-4f32-b33f-97ae3945cab9.gif)
+![LongSnake](https://user-images.githubusercontent.com/76095991/204779115-30e5fe83-c9af-4539-bef3-435d068ec8b6.gif)
