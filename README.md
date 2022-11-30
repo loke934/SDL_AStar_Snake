@@ -5,10 +5,11 @@ Since most of the C++ game programming I have done is in Unreal, the aim with th
 but still within game development. I also thought it would be fun to do pathfinding and choose the A* algorithm. 
 The code is divided and structured after some primary features. Game class that handles the overall state of the game. 
 
-- Shape class for rendering and “engine” class for handling time and the SDL setup. 
-- Grid-based movement, with a grid cell class that stores information needed for pathfinding, rendering etc. 
-- Finding the shortest path to a target with A* pathfinding, using heap sort. 
-- Growing snake with a linked-list approach.  
+- Game class that handles the overall state of the game.
+- Shape class for rendering and an "engine" class for handling time and the SDL setup.
+- Grid-based movement, with a grid cell class that stores information needed for pathfinding etc.
+- Finding the shortest path to a target with A*, using heap sort. 
+- Growing snake with a linked-list approach. 
 
 ![DrawPath](https://user-images.githubusercontent.com/76095991/204778272-fbc30ddc-b492-4666-a582-5e3459d3711b.png)
 
