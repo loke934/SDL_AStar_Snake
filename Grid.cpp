@@ -80,9 +80,9 @@ void Grid::SetNeighbors(const GridCell* currentCell, std::vector<GridCell*> &nei
             {
                 continue;
             }
-        
-            int checkX = currentCell->gridPosition.x + x;
-            int checkY = currentCell->gridPosition.y + y;
+
+            const int checkX = currentCell->gridPosition.x + x;
+            const int checkY = currentCell->gridPosition.y + y;
         
             if (checkX >= 0 && checkX < GRID_SIZE_X && checkY >= 0 && checkY < GRID_SIZE_Y)
             {

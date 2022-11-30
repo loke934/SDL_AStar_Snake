@@ -73,8 +73,8 @@ void Game::DoMovement()
     {
         if (index < length)
         {
-            Vector2Int nextGridCell = path[index];
-            Vector2  nextPosition = grid->gridArray[nextGridCell.x][nextGridCell.y].worldPosition;
+            const Vector2Int nextGridCell = path[index];
+            const Vector2  nextPosition = grid->gridArray[nextGridCell.x][nextGridCell.y].worldPosition;
             snake->MoveSnake(nextPosition, nextGridCell);
             index++;
             time = timer;

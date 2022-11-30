@@ -6,7 +6,6 @@
 #define GRID_SIZE_Y 15
 #define GRID_SIZE (GRID_SIZE_X * GRID_SIZE_Y)
 
-
 class Grid
 {
 public:
@@ -21,7 +20,6 @@ public:
     void SetNeighbors(const GridCell* currentCell, std::vector<GridCell*> &neighbors);
     int GetDistance(GridCell* cellA, GridCell* cellB);
     void RetracePath(GridCell* startCell, GridCell* targetCell, std::vector<Vector2Int> &path);
-
 };
 
 

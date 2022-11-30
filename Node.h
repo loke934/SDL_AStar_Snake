@@ -3,7 +3,6 @@
 
 class Node
 {
-
 public:
     Node* previousNode = nullptr;
     Node* nextNode = nullptr;

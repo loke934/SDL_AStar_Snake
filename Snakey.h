@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <memory>
 #include "Node.h"
 
 class Snakey

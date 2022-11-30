@@ -44,12 +44,10 @@ void Heap::SortDown(GridCell* item)
     {
         int childIndexLeft = item->heapIndex * 2 + 1;
         int childIndexRight = item->heapIndex * 2 + 2;
-        int swapIndex = 0;
+        int swapIndex = childIndexLeft;
         //set the index to be swapped to the child with the lowest f-cost
         if (childIndexLeft < currentItemCount)
         {
-            swapIndex = childIndexLeft;
-            
             if (childIndexRight < currentItemCount)
             {
                 if (Compare(items[childIndexLeft],items[childIndexRight]) < 0)

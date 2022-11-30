@@ -36,7 +36,7 @@ public:
     Vector2 worldPosition;
     GRIDCELL_STATE currentState = WALKABLE;
 
-    //A*
+    //Pathfinding
     Vector2Int gridPosition;
     int gCost = 0;
     int hCost = 0;

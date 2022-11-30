@@ -17,7 +17,6 @@ void DrawBox(const AABB& box)
 {
     SDL_FRect rect = {box.xMin, box.yMin, (box.xMax -box.xMin), (box.yMax - box.yMin)};
     SDL_RenderFillRectF(render, &rect);
-    
 }
 
 

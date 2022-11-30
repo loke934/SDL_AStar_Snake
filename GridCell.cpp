@@ -11,7 +11,6 @@ void GridCell::Draw()
         break;
     case OBSTACLE:
         SDL_SetRenderDrawColor(render,100, 0, 100, 255);
-        /*SDL_SetRenderDrawColor(render,100, 100, 100, 255); //Debug color */
         width = 50;
         height = 50;
         break;

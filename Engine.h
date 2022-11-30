@@ -11,5 +11,5 @@ extern float deltaTime;
 class Engine
 {
 public:
-    void SetDeltaTime();
+    static void SetDeltaTime();
 };

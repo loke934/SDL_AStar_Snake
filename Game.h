@@ -24,7 +24,7 @@ public:
 
     GAME_STATE currentState = DEFAULT_STATE;
     
-    //A*
+    //Pathfinding
     std::vector<Vector2Int> path;
     Vector2Int fruitPos;
     Vector2Int snakePos;
@@ -41,5 +41,5 @@ public:
     bool UpdateGame();
     void DoMovement();
     void SetMovementPath();
-    Vector2Int GetRandomGridPosition();
+    static Vector2Int GetRandomGridPosition();
 };
