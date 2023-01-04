@@ -3,7 +3,7 @@
 
 Since most of the C++ game programming I have done is in Unreal, the aim with this project was to focus on and practice C++ outside of Unreal, 
 but still within game development. I also thought it would be fun to do pathfinding and choose the A* algorithm. 
-The code is divided and structured after some primary features. Game class that handles the overall state of the game. 
+The code is divided and structured after some primary features. 
 
 - Game class that handles the overall state of the game.
 - Shape class for rendering and an "engine" class for handling time and the SDL setup.
